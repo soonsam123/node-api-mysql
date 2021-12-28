@@ -44,4 +44,17 @@ module.exports = {
 
     res.status(200).send({ mensagem: "Produto editado com sucesso" });
   },
+
+  async delete(req, res) {
+    const sequelize = new Sequelize("china_commerce", "china", "12345", {
+      host: "localhost",
+      dialect: "mysql",
+    });
+
+    await Produtos(sequelize, Sequelize.DataTypes).destroy({
+      where: { id: req.params.id },
+    });
+
+    res.status(200).send({ mensagem: "Produto removido com sucesso" });
+  },
 };
